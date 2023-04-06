@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Trivia Game</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <body>
+    <!--highscores and timer top outer div-->
+    <div class="top-container">
+
+      <div class="top titles">
+          <button>View High Scores</button>
+          <p>Time Left: 00:00</p>
+      </div>
+
+       <!--Title of the game-->
+      <div class="middle-container">
+        <header class="title-of-the-game">
+          <h1>JavaScript Trivia Game</h1>
+        </header>
+        <p>Test your coding skills by answering the following questions within the time limit.</p>
+        <p>Keep in mind that incorrect answers will penalise your score time by ten seconds!</p>    
+      
+        <div class="start-button game">
+          <button id ="start button">Let's Start</button>
+        </div>  
+      </div>
+     
+    <main>
+      <!--Javascript questions-->
+      <section class="js-questions">
+        <h2>Trivia Question:</h2>
+        <ul>
+          <button>Answer 1</button>
+          <button>Answer 2</button>
+          <button>Answer 3</button>
+          <button>Answer 4</button>
+        </ul>
+      </section>
+
+      <!--Javascript finish game-->
+      <section class="js-finish-questions">
+        <h2>Quiz Finished</h2>
+        <p>Your score: 0</p>
+
+        <div>
+        <!--All done!-->
+        <!--Your final score is ____.-->
+        <!--DO NOT KNOW HOW TO ADD THIS-->
+          <label initials="">Enter Initials:</label>
+          <input type="text">
+          <button>Submit</button>
+        </div> 
+      </section>
+      
+      <!--Shows highscores-->
+      <section class="show-highscores">
+        <h2>Highscores</h2>
+        <ol>
+          <li>show highscores1</li>
+          <li>show highscores2</li>
+          <li>show highscores3</li>
+          <li>show highscores4</li>
+          <li>show highscores5</li>
+        </ol>
+        <button>Go Back</button>
+        <button>Clear Highscores</button>
+      </section>
+    
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
