@@ -15,10 +15,9 @@ Fourth Challenge (JavaScript and Web APIs)
 ## Credits
 ## Licence
 ## References
-- Dear Programmer's [Youtube](https://www.youtube.com/watch?v=WiLTsxjCmWQ) JavaScript Quiz App with Timer - Quiz App Using HTML, CSS and JavaScript (Inspiration #1)
-- Rachel Yeoh's [Youtube](https://www.youtube.com/watch?v=28pArrDzQII&t=0s)Build a Simple Quiz App part 1: HTML, CSS (Inspiration #2)
-- Rachel Yeoh's [Youtube](https://www.youtube.com/watch?v=vj6bAznjzxo)
-Build a Simple Quiz App part 2: JavaScript (Inspiration #2)
+- [Web Dev Simplified](https://www.youtube.com/watch?v=riDzcEQbX6k&t=10s)'s Build a Quiz App with JavaScript
+- [W3S](https://www.w3schools.com/js/) for JavaScript Tutorials
 - [chatGPT](https://chat.openai.com) for JavaScript's questions and to explain further some terminologies that I can't understand.
+- 
 ## Acknowledgements
 ## Author
