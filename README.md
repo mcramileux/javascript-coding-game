@@ -1,4 +1,4 @@
-# javascript-coding-game
+# JavaScript Coding Game
 Fourth Challenge (JavaScript and Web APIs)
 
 ## Description
