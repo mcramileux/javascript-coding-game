@@ -5,9 +5,9 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-:root {
-  --hue-correct: green;
-  --hue-wrong: red;
+h1,
+h2 {
+  text-decoration: underline;
 }
 
 body {
@@ -20,28 +20,18 @@ body {
   height: 100vh;
 }
 
-/*.title-container, 
-.instructions-container {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}*/
-
-body.correct {
-  --hue: var(--hue-correct);
+p {
+  margin-top: 1px;
+  margin-bottom: 0;
+  line-height: 20px;
+  font-size: 16px;
+}
+section {
+  display:none;
 }
 
-body.wrong {
-  --hue: var(--hue-wrong);
-}
-
-.timer {
-  display: none;
-  align-items: end;
+#instructions-page {
+  display:block;
 }
 
 .container {
@@ -53,6 +43,31 @@ body.wrong {
   box-shadow: 10px 10px 10px lightslategrey;
 }
 
+.score-button,
+.start-button,
+.button,
+.submit-initials,
+.go-back-button,
+.clear-scores-button {
+  background-color:lightsteelblue;
+  border: 1px, solid;
+  padding: 5px 10px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.show-timer {
+  display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .button-box {
   display:grid;
   grid-template-columns: repeat(2, auto);
@@ -61,39 +76,37 @@ body.wrong {
   padding: 30px;
 }
 
-.button {
-  background-color:lightsteelblue;
-  border: 1px, solid;
-  padding: 5px 10px;
-  border-radius: 8px;
-  outline: none;
-}
-
 .button:hover {
   border-color: black;
 }
 
-.button.correct {
- --hue: var(--hue-correct)
+#timer {
+  font-weight:bold;
+  font-size: 15px;
+  text-decoration: underline;
 }
 
-.button.wrong {
-  --hue: var(--hue-wrong)
+#timer:hover{
+  color: black;
 }
 
-.start-button,
-.next-button {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 10px;
-}
-
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hide {
+/*.question-page,
+.final-score {
   display: none;
+}*/
+
+#display-score-button {
+
 }
+
+#display-score-button:hover {
+  border-color: black;
+}
+
+.go-back-button, 
+.clear-scores-button, 
+.submit-initials {
+
+}
+
+

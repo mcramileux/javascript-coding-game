@@ -1,141 +1,133 @@
-var startButton = document.getElementById("start-button")
-var nextButton = document.getElementById("next-button")
-var questionContainerElement = document.getElementById("question-container")
-var questionElement = document.getElementById("question")
-var answerButtonsElement = document.getElementById("answer-buttons")
+//IDENTIFY THE GLOBAL VARIABLES
+var _questionID = 0;
+var _correctCount = 0;
 
-let shuffledQuestions, currentQuestionIndex
-
-startButton.addEventListener("click", startGame)
-nextButton.addEventListener("click", ( => {
-  currentQuestionIndex++
-  setNextQuestion()
-}))
-
-function startGame() {
-  startButton.classList.add("hide")
-  shuffledQuestions = questions.sort(()=> Math.random () - .5)
-  currentQuestionIndex = 0
-  questionContainerElement.classList.remove("hide")
-  setNextQuestion()
-}
-
-function setNextQuestion () {
-  resetState()
-  showQuestion(shuffledQuestions[currentQuestionIndex])
-}
-
-function showQuestion(question){
-  questionElement.innerText = question.question
-  question.answers.forEach(answer => {
-    var button = document.createElement("button")
-    button.innerText = answer.text
-    button.classList.add("button")
-
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
-    }
-    button.addEventListener("click", selectAnswer)
-    answer.ButtonsElement.appendChild(button)
-  })
-}
-
-function resetState() {
-  clearStatusClass(document.body)
-  nextButton.classList.add("hide")
-  while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild
-    (answerButtonsElement.firstChild)
-  }
-}
-
-function selectAnswer (e) {
-  var selectedButton = e.target
-  var correct = selectedButton.dataset.correct
-  setStatusClass(document.body, correct)
-  Array.from(answerButtonsElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-  })
-  if(shuffledQuestions.length > currentQuestionIndex + 1)
- nextButton.classList.remove("hide")
-} else {
-  startButton.innerText = "Restart"
-  startButton.classList.remove("hide")
-}
-
-function setStatusClass(element, correct) {
-  clearStatusClass(element)
-  if (correct) {
-    element.classList.add("correct")
-  } else {
-    element.classList.add("wrong")
-  }
-}
-var questions = [
-  {
-    question: "Which language runs in a web browser?",
-    answer: [
-      { text: "Java", correct: false },
-      { text: "C", correct: false },
-      { text: "Python", correct: false },
-      { text: "JavaScript", correct: true }
-    ]
-  },
+//QUESTIONS AND ANSWERS
+var _questions = [
   {
     question: "Which of the following is not a JavaScript data type?",
-    answer: [
-      { text: "String", correct: false },
-      { text: "Boolean", correct: false },
-      { text: "Integer", correct: true },
-      { text: "Object", correct: false }
-    ]
+    answers: {
+      A: "String",
+      B: "Boolean",
+      C: "Integer",
+      D: "Object"
+    },
+    correctAnswer: "C"
   },
   {
     question: "What is the output of the following code?\n\nconsole.log(typeof 42);",
-    answer: [
-      { text: "\"number\"", correct: true },
-      { text: "\"string\"", correct: false },
-      { text: "\"boolean\"", correct: false },
-      { text: "\"undefined\"", correct: false }
-    ]
-  },
-  {
-    question: "What is the correct syntax to declare a JavaScript variable?",
-    answer: [
-      { text: "var = myVariable;", correct: false },
-      { text: "myVariable = var;", correct: false },
-      { text: "var myVariable;", correct: true },
-      { text: "myVariable var;", correct: false }
-    ]
+    answers: {
+      A: "\"number\"",
+      B: "\"string\"",
+      C: "\"boolean\"",
+      D: "\"undefined\""
+    },
+    correctAnswer: "A"
   },
   {
     question: "Which of the following is used to add a comment in JavaScript?",
-    answer: [
-      { text: "//", correct: true },
-      { text: "#", correct: false },
-      { text: "/", correct: false },
-      { text: "<!-- -->", correct: false }
-    ]
+    answers: {
+      A: "//",
+      B: "#",
+      C: "/",
+      D: "<!-- -->"
+    },
+    correctAnswer: "A"
   },
   {
     question: "What is the purpose of the `typeof` operator in JavaScript?",
-    answer: [
-      { text: "To check if a variable is undefined", correct: false },
-      { text: "To convert a variable to a string", correct: false },
-      { text: "To check the data type of a variable", correct: true },
-      { text: "To assign a value to a variable", correct: false }
-    ]
+    answers: {
+      A: "To check if a variable is undefined",
+      B: "To convert a variable to a string",
+      C: "To check the data type of a variable",
+      D: "To assign a value to a variable"
+    },
+    correctAnswer: "C"
   },
   {
     question: "Which of the following is a method of the `Array` object in JavaScript?",
-    answer: [
-      { text: "length()", correct: false },
-      { text: "reverse()", correct: true },
-      { text: "toUpperCase()", correct: false },
-      { text: "concat()", correct: false }
-    ]
-  },
+    answers: {
+      A: "length()",
+      B: "reverse()",
+      C: "toUpperCase()",
+      D: "concat()"
+    },
+    correctAnswer: "B"
+  }];
+
+  //SETTING UP THE TIMER AND ITS INTERVAL
+
+  //var showTimerInterval = setInterval (setShowTimer, 1000);
+
+  //UPDATE AND DISPLAY THE TIMER ON A WEBPAGE.
+  function setShowTimer() {
+
+    if (time_start)//has been defined and is not null
+    time--; //decrements the value of variable by 1
+    if(time<= 0) { //the value of "time" is less than or equal to 0
+    end_quiz(); //end_quiz" function is responsible for stopping the quiz and displaying the user's score.
+    time = 0;    
+    }
+    document.getElementById("timer").innerHTML = time; //updates the timer displayed on the web page
+}
+
+  //START EVENT LISTENER
+  //when the start button clicks, the timer and question start
+  document.getElementById("start-quiz-button").addEventListener("click", function() {
+    setQuizQuestions(); 
+    document.getElementById("instructions-page").style.display = "none";
+    document.getElementById("question-page").style.display = "block";
+});
+
+
+  document.getElementById("answer-buttons").addEventListener("click", function(ev) {
+    checkAnswers(ev.target.dataset.answer);
+    
+});
+
+  //QUESTION FUNCTION
+  // will display questions and multiple choice answers
+  function setQuizQuestions() {
+    debugger;
+    var html = "";
+    var answers = _questions[_questionID].answers;
+    document.getElementById("question").innerHTML = _questions[_questionID].question;
+    document.getElementById("quiz-feedback").innerHTML = "";
+    for (var answer in answers) {     
+      html += '<button data-answer="'+answer +'" class="button">'+answer + ": "+ answers[answer]+'</button>';
+      }
+      document.getElementById("answer-buttons").innerHTML = html;
+};
+
+  function checkAnswers(aID){ 
+    
+    var feedback = document.getElementById("quiz-feedback");
+    if (_questions[_questionID].correctAnswer == aID) {
+      feedback.innerHTML = "Correct!";
+      _correctCount = _correctCount + 1;
+    }
+    else{
+      feedback.innerHTML = "Wrong!";
+    }
+    document.getElementById("my-score").innerHTML = _correctCount;
+
+     
+    if (_questionID < _questions.length - 1){
+      _questionID = _questionID + 1;
+      setQuizQuestions();
+    }
+    else {
+      document.getElementById("final-score-page").style.display = "block";
+    document.getElementById("question-page").style.display = "none";
+    }
+  }
 
 
 
-]
+
+  //NEED LOCAL STORAGE
+
+  //SHOW HIGHSCORES
+  
+
+  //ENTER INITIALS
