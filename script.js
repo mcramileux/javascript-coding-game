@@ -1,6 +1,7 @@
 //IDENTIFY THE GLOBAL VARIABLES
 var _questionID = 0;
 var _correctCount = 0;
+var _secondsLeft = 60;
 
 //QUESTIONS AND ANSWERS
 var _questions = [
@@ -72,23 +73,26 @@ var _questions = [
   
     var timerInterval = setInterval(updateShowTimer, 1000);
   }
-
+  
   //START EVENT LISTENER
   //when the start button clicks, the timer and question start
-  document.getElementById("start-quiz-button").addEventListener("click", function() {
+    document.getElementById("start-quiz-button").addEventListener("click", function() {
     setQuizQuestions(); 
     document.getElementById("instructions-page").style.display = "none";
     document.getElementById("question-page").style.display = "block";
+
 });
 
+
   document.getElementById("answer-buttons").addEventListener("click", function(ev) {
-    checkAnswers(ev.target.dataset.answer);   
+    checkAnswers(ev.target.dataset.answer);
+    
 });
 
   //QUESTION FUNCTION
   // will display questions and multiple choice answers
   function setQuizQuestions() {
-    debugger;
+    //debugger;
     var html = "";
     var answers = _questions[_questionID].answers;
     document.getElementById("question").innerHTML = _questions[_questionID].question;
@@ -108,9 +112,11 @@ var _questions = [
     }
     else{
       feedback.innerHTML = "Wrong!";
+      timeLeft -= 10;
     }
     document.getElementById("my-score").innerHTML = _correctCount;
- 
+
+     
     if (_questionID < _questions.length - 1){
       _questionID = _questionID + 1;
       setQuizQuestions();
@@ -121,16 +127,22 @@ var _questions = [
     }
   }
 
+  //SHOW HIGH SCORES
+  //var enterInitials = document.getElementsById("submit-initials");
+  //var viewHighScores = document.getElementById("show-highscores");
 
+  //ENTER INITIALS
+  function submitInitials() {
+    var enterInitials = document.getElementById("enter-initials").value;
+    document.getElementById("submit-initials").innerHTML = submitInitials;
+  };
 
-
-  //STILL MISSING FROM THE ACCEPTANCE CRITERIA
+//STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
-
+  //WRONG ANF CORRECT ARE NOT SHOWING
   //VIEW HIGH SCORES IN FRONT PAGE
-  //TIMER NEEDS TO DECREASE --TRIED TO DO IT, PLEASE CHECK
   //CLEAR HIGH SCORES
-  //SHOW HIGH SCORES (showing it from the next page is optional)
-  //ENTER INITIALS --TRIED DOING IT, PLEASE CHECK
+  //SHOW HIGH SCORES
+  
   //DEBUGGER: YOU CAN CLICK AROUND THE QUESTION WHEN CHOOSING AN ANSWER
   //TAKES AWHILE TO GO TO THE NEXT PAGE
