@@ -56,20 +56,22 @@ var _questions = [
   }];
 
   //SETTING UP THE TIMER AND ITS INTERVAL
+  var showTimer = document.querySelector("show-timer");
+  var timer = document.getElementById ("timer");
 
-  //var showTimerInterval = setInterval (setShowTimer, 1000);
+  function setTime() {
+    var timerInterval = setInterval (function() {
+      secondsLeft--;
+      timeEl.textContent = secondsLeft + " seconds";
 
-  //UPDATE AND DISPLAY THE TIMER ON A WEBPAGE.
-  function setShowTimer() {
-
-    if (time_start)//has been defined and is not null
-    time--; //decrements the value of variable by 1
-    if(time<= 0) { //the value of "time" is less than or equal to 0
-    end_quiz(); //end_quiz" function is responsible for stopping the quiz and displaying the user's score.
-    time = 0;    
-    }
-    document.getElementById("timer").innerHTML = time; //updates the timer displayed on the web page
-}
+      if (secondsLeft === 0) {
+        clearInterval(timerInterval);
+        sendMessage;
+      }
+    },  1000);
+  
+    var timerInterval = setInterval(updateShowTimer, 1000);
+  }
 
   //START EVENT LISTENER
   //when the start button clicks, the timer and question start
@@ -79,10 +81,8 @@ var _questions = [
     document.getElementById("question-page").style.display = "block";
 });
 
-
   document.getElementById("answer-buttons").addEventListener("click", function(ev) {
-    checkAnswers(ev.target.dataset.answer);
-    
+    checkAnswers(ev.target.dataset.answer);   
 });
 
   //QUESTION FUNCTION
@@ -110,8 +110,7 @@ var _questions = [
       feedback.innerHTML = "Wrong!";
     }
     document.getElementById("my-score").innerHTML = _correctCount;
-
-     
+ 
     if (_questionID < _questions.length - 1){
       _questionID = _questionID + 1;
       setQuizQuestions();
@@ -125,9 +124,13 @@ var _questions = [
 
 
 
+  //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
 
-  //SHOW HIGHSCORES
-  
-
-  //ENTER INITIALS
+  //VIEW HIGH SCORES IN FRONT PAGE
+  //TIMER NEEDS TO DECREASE --TRIED TO DO IT, PLEASE CHECK
+  //CLEAR HIGH SCORES
+  //SHOW HIGH SCORES (showing it from the next page is optional)
+  //ENTER INITIALS --TRIED DOING IT, PLEASE CHECK
+  //DEBUGGER: YOU CAN CLICK AROUND THE QUESTION WHEN CHOOSING AN ANSWER
+  //TAKES AWHILE TO GO TO THE NEXT PAGE
