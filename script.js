@@ -58,20 +58,21 @@ var _questions = [
 
   //SETTING UP THE TIMER AND ITS INTERVAL
   var showTimer = document.querySelector("show-timer");
-  var timer = document.getElementById ("timer");
+  var timer = document.getElementById("timer");
+  var timeEl = document.getElementById("timer-score");
 
   function setTime() {
     var timerInterval = setInterval (function() {
-      secondsLeft--;
-      timeEl.textContent = secondsLeft + " seconds";
+      _secondsLeft--;
+      timeEl.textContent = _secondsLeft;
 
-      if (secondsLeft === 0) {
+      if (_secondsLeft === 0) {
         clearInterval(timerInterval);
         sendMessage;
       }
     },  1000);
   
-    var timerInterval = setInterval(updateShowTimer, 1000);
+    //var timerInterval = setInterval(updateShowTimer, 1000);
   }
   
   //START EVENT LISTENER
@@ -80,15 +81,15 @@ var _questions = [
     setQuizQuestions(); 
     document.getElementById("instructions-page").style.display = "none";
     document.getElementById("question-page").style.display = "block";
-
+      setTime(); 
 });
 
-
-  document.getElementById("answer-buttons").addEventListener("click", function(ev) {
-    checkAnswers(ev.target.dataset.answer);
-    
+    document.getElementById("answer-buttons").addEventListener("click", function(ev) {
+    //put a conditional check button and just return//
+      checkAnswers(ev.target.dataset.answer);
 });
 
+  
   //QUESTION FUNCTION
   // will display questions and multiple choice answers
   function setQuizQuestions() {
@@ -112,7 +113,7 @@ var _questions = [
     }
     else{
       feedback.innerHTML = "Wrong!";
-      timeLeft -= 10;
+      _secondsLeft -= 10;
     }
     document.getElementById("my-score").innerHTML = _correctCount;
 
@@ -133,7 +134,7 @@ var _questions = [
 
   //ENTER INITIALS
   function submitInitials() {
-    var enterInitials = document.getElementById("enter-initials").value;
+    var enterInitials = document.querySelector("enter-initials").value;
     document.getElementById("submit-initials").innerHTML = submitInitials;
   };
 
