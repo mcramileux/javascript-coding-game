@@ -68,7 +68,7 @@ var _questions = [
 
       if (_secondsLeft === 0) {
         clearInterval(timerInterval);
-        sendMessage;
+        sendMessage();
       }
     },  1000);
   
@@ -85,10 +85,12 @@ var _questions = [
 });
 
     document.getElementById("answer-buttons").addEventListener("click", function(ev) {
-    //put a conditional check button and just return//
-      checkAnswers(ev.target.dataset.answer);
-});
-
+      if(ev.target.tagName == "DIV"){
+        return
+      } else {
+        checkAnswers(ev.target.dataset.answer);
+      }   
+  });
   
   //QUESTION FUNCTION
   // will display questions and multiple choice answers
@@ -128,15 +130,23 @@ var _questions = [
     }
   }
 
-  //SHOW HIGH SCORES
-  //var enterInitials = document.getElementsById("submit-initials");
-  //var viewHighScores = document.getElementById("show-highscores");
+  //SHOW HIGH SCORES---ADD MORE
+  function endQuiz() {
+    clearInterval(timer);
+    showHighScores();
+    document.getElementById("question").style.display = "none";
+    document.getElementById("my-score").textContent
 
-  //ENTER INITIALS
+  }
+
+
+  //ENTER INITIALS---ADD MORE
   function submitInitials() {
     var enterInitials = document.querySelector("enter-initials").value;
     document.getElementById("submit-initials").innerHTML = submitInitials;
   };
+
+
 
 //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
