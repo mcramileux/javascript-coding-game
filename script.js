@@ -99,7 +99,7 @@ var _questions = [
     var html = "";
     var answers = _questions[_questionID].answers;
     document.getElementById("question").innerHTML = _questions[_questionID].question;
-    document.getElementById("quiz-feedback").innerHTML = "";
+    //document.getElementById("quiz-feedback").innerHTML = "";
     for (var answer in answers) {     
       html += '<button data-answer="'+answer +'" class="button">'+answer + ": "+ answers[answer]+'</button>';
       }
@@ -150,10 +150,10 @@ var _questions = [
 
 //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
-  //WRONG ANF CORRECT ARE NOT SHOWING
   //VIEW HIGH SCORES IN FRONT PAGE
   //CLEAR HIGH SCORES
   //SHOW HIGH SCORES
+  //CAN Click HIGH SCORES FROM THE MAIN PAGE
   
   //DEBUGGER: YOU CAN CLICK AROUND THE QUESTION WHEN CHOOSING AN ANSWER
   //TAKES AWHILE TO GO TO THE NEXT PAGE
