@@ -1,7 +1,7 @@
 //IDENTIFY THE GLOBAL VARIABLES
 var _questionID = 0;
 var _correctCount = 0;
-var _secondsLeft = 10; //changing to 10seconds for debugging
+var _secondsLeft = 60; //changing to 10seconds for debugging
 
 //QUESTIONS AND ANSWERS
 var _questions = [
@@ -142,13 +142,12 @@ var _questions = [
   }
 
   //SHOW HIGH SCORES---ADD MORE
-  function endQuiz() {
-    clearInterval(timerInterval);
-    showHighScores();
-    document.getElementById("question").style.display = "none";
-    document.getElementById("my-score").textContent
-  }
-
+  // function endQuiz() {
+  //   clearInterval(timerInterval);
+  //   showHighScores();
+  //   document.getElementById("question").style.display = "none";
+  //   document.getElementById("my-score").textContent
+  // }
 
   //ENTER INITIALS---ADD MORE
     var enterInitials = document.getElementById("main-button");
@@ -158,7 +157,7 @@ var _questions = [
       console.log(initials.value);
     });
     saveHighScore = ev => {
-      console.log("clicked the save button");
+      console.log("clicked the submit button");
       ev.preventDefault();
     };
 
@@ -177,6 +176,23 @@ var _questions = [
 
   });
 
+  // // Retrieve the high scores from local storage
+  //   function showHighScores() {
+  //    var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+      
+  //    var highScoresRank = document.getElementById('high-scores-rank');
+  //     highScoresList.innerHTML = '';
+      
+  //     highScores.forEach(score => {
+  //       var li = document.createElement('li');
+  //       li.innerText = `${initials} - ${score}`;
+  //       highScoresRank.appendChild(li);
+  //     });
+  //   }
+    // clearInterval(timerInterval);
+    // showHighScores();
+    // document.getElementById("question").style.display = "none";
+    // document.getElementById("my-score").textContent
 //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
   //VIEW HIGH SCORES IN FRONT PAGE
