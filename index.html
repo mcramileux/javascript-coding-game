@@ -44,11 +44,14 @@
     <section id="final-score-page">
           <h2>All done!</h2>
             <p>Your final score is: <span id="my-score">0</span> out of <span class="total-score">5</span></p>
-            <p><form id="initials-form">
+  <!--SUBMITTING INITIALS-->
+            <form id="initials-form">
               <label for="enter-initials">Enter your initials:</label>
-                <input type="text" id="enter-initials" name="initials" />
-                  <button id="main-button" class="submit-initials">Submit</button>
-            </p>
+                <input type="text" id="enter-initials" name="initials" placeholder="initials"/>
+                  <button type ="submit" id="main-button" class="submit-initials" 
+                  onclick="saveHighScore(event)">Submit</button>
+            </form>      
+    <!--HIGH SCORE PAGE-->        
                   <h2>High Scores</h2>
                 <div id="show-highscores"></div>
               <div class="highscore-page" style="display: none"></div>

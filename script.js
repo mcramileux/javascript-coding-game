@@ -1,7 +1,7 @@
 //IDENTIFY THE GLOBAL VARIABLES
 var _questionID = 0;
 var _correctCount = 0;
-var _secondsLeft = 60;
+var _secondsLeft = 10; //changing to 10seconds for debugging
 
 //QUESTIONS AND ANSWERS
 var _questions = [
@@ -31,7 +31,7 @@ var _questions = [
       A: "//",
       B: "#",
       C: "/",
-      D: "<!-- -->"
+      D: "$"
     },
     correctAnswer: "A"
   },
@@ -61,7 +61,6 @@ var _questions = [
   var timer = document.getElementById("timer");
   var timeEl = document.getElementById("timer-score");
   var timerInterval;
-  //put a global variable for timer to stop and put alert "time's up!"
 
   function setTime() {
     timerInterval = setInterval (function() {
@@ -70,8 +69,8 @@ var _questions = [
 
       if (_secondsLeft <= 0) {
         clearInterval(timerInterval);
-        sendMessage();
-
+        alert("TIME'S UP!");
+        timeEl.textContent = _secondsLeft;
 
     document.getElementById("final-score-page").style.display = "block";
     document.getElementById("question-page").style.display = "none";
@@ -81,6 +80,10 @@ var _questions = [
   
     //var timerInterval = setInterval(updateShowTimer, 1000);
   }
+
+  function sendMessage(){
+    //alert the user that the time is up
+ }
   
   //START EVENT LISTENER
   //when the start button clicks, the timer and question start
@@ -148,10 +151,21 @@ var _questions = [
 
 
   //ENTER INITIALS---ADD MORE
-  function submitInitials() {
-    var enterInitials = document.querySelector("enter-initials").value;
-    document.getElementById("submit-initials").innerHTML = submitInitials;
-  };
+  //function submitInitials() 
+    var enterInitials = document.getElementById("submit-initials")
+
+    enterInitials.addEventListener("submit-initials", () => {
+      console.log(username.value)
+    });
+    
+    saveHighScore = ev => {
+      console.log("clicked the save button");
+      ev.preventDefault();
+    };
+
+    //querySelector("enter-initials").value;
+    //document.getElementById("submit-initials").innerHTML = submitInitials;
+  
 
 
 
