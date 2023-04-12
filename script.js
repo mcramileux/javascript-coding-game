@@ -151,23 +151,31 @@ var _questions = [
 
 
   //ENTER INITIALS---ADD MORE
-  //function submitInitials() 
-    var enterInitials = document.getElementById("submit-initials")
-
-    enterInitials.addEventListener("submit-initials", () => {
-      console.log(username.value)
+    var enterInitials = document.getElementById("main-button");
+    var initials = document.getElementById("enter-initials");
+    enterInitials.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log(initials.value);
     });
-    
     saveHighScore = ev => {
       console.log("clicked the save button");
       ev.preventDefault();
     };
 
-    //querySelector("enter-initials").value;
-    //document.getElementById("submit-initials").innerHTML = submitInitials;
-  
+  //SAVING THE SCORE 
+  saveSubmitButton.addEventListener('click', function () {
+    var users = JSON.parse(localStorage.getItem("enterInitials")) || [];
+    var nameUser = document.getElementById('enterInitials').value;
+    var data = { name: enterInitials, score: saveScores };
 
+    enterInitials.push(data);
+    localStorage.setItem('enterInitials', JSON.stringify(users));
+    confirm ("Your score has been saved");
+    document.getElementById("confirmButton").addEventListener("click", function() {
+        document.getElementById("enterInitials").value = "";
+      });
 
+  });
 
 //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //NEED LOCAL STORAGE
@@ -176,5 +184,4 @@ var _questions = [
   //SHOW HIGH SCORES
   //CAN Click HIGH SCORES FROM THE MAIN PAGE
   
-  //DEBUGGER: YOU CAN CLICK AROUND THE QUESTION WHEN CHOOSING AN ANSWER
-  //TAKES AWHILE TO GO TO THE NEXT PAGE
+
