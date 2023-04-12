@@ -3,6 +3,7 @@ var _questionID = 0;
 var _correctCount = 0;
 var _secondsLeft = 60; //changing to 10seconds for debugging
 var _qWait = 0;
+var _timerInterval = 0;
 
 //QUESTIONS AND ANSWERS
 var _questions = [
@@ -61,20 +62,16 @@ var _questions = [
   var showTimer = document.querySelector("show-timer");
   var timer = document.getElementById("timer");
   var timeEl = document.getElementById("timer-score");
-  var timerInterval;
 
   function setTime() {
-    timerInterval = setInterval (function() {
+    _timerInterval = setInterval (function() {
       _secondsLeft--;
       timeEl.textContent = _secondsLeft;
 
       if (_secondsLeft <= 0) {
-        clearInterval(timerInterval);
+        clearInterval(_timerInterval);
         alert("TIME'S UP!");
         timeEl.textContent = _secondsLeft;
-
-    document.getElementById("final-score-page").style.display = "block";
-    document.getElementById("question-page").style.display = "none";
     endQuiz();
       }
     },  1000);
@@ -90,17 +87,15 @@ var _questions = [
   //when the start button clicks, the timer and question start
     document.getElementById("start-quiz-button").addEventListener("click", function() {
     setQuizQuestions(); 
-    document.getElementById("instructions-page").style.display = "none";
-    document.getElementById("question-page").style.display = "block";
+    showPage(this.dataset.goto);
       setTime(); 
   });
 
     document.getElementById("answer-buttons").addEventListener("click", function(ev) {
-      if(ev.target.tagName == "DIV"){
-        return
-      } else {
-        checkAnswers(ev.target.dataset.answer);
-      }   
+      document.querySelectorAll("#answer-buttons button").forEach((button) => {
+      button.disabled = true; 
+      }); 
+      checkAnswers(ev.target.dataset.answer);  
   });
   
   //QUESTION FUNCTION
@@ -120,6 +115,7 @@ var _questions = [
   function checkAnswers(aID){ 
     
     var feedback = document.getElementById("quiz-feedback");
+    clearTimeout(_qWait);
     if (_questions[_questionID].correctAnswer == aID) {
       feedback.innerHTML = "Correct!";
       _correctCount = _correctCount + 1;
@@ -137,27 +133,39 @@ var _questions = [
         setQuizQuestions();
     }
        else {
-        document.getElementById("final-score-page").style.display = "block";
-        document.getElementById("question-page").style.display = "none";
+        
         endQuiz();
     }
-      }, 4000);
+      }, 3000);
       
   };
 
   //SHOW HIGH SCORES---ADD MORE
   function endQuiz() {
     timeEl.textContent = "0";
-    clearInterval(timerInterval);
+    clearInterval(_timerInterval);
     showHighScores();
+    showPage("final-score-page");
   }
 
   //ENTER INITIALS---ADD MORE
-    document.getElementById("main-button").addEventListener("click", (e) => {
+    document.getElementById("main-button").addEventListener("click", function(e) {
       e.preventDefault();
       console.log(document.getElementById("enter-initials").value);
-      document.getElementById("final-score-page").style.display = "none";
+      showPage(this.dataset.goto);
       saveHighScore();
+      showHighScores();
+    });
+
+    document.getElementById("view-highscore").addEventListener("click", function(e) {
+      e.preventDefault();
+      showHighScores();
+      showPage(this.dataset.goto);
+    });
+
+    document.getElementById("scores-button").addEventListener("click", function(e) {
+      e.preventDefault();
+      localStorage.removeItem("highScoreList");
       showHighScores();
     });
 
@@ -182,26 +190,36 @@ var _questions = [
     function showHighScores() {
       var highScoreList = localStorage.getItem("highScoreList");
       var html = "";
-      document.getElementById("high-score-page").style.display = "block";
       if (highScoreList != null) {
-           highScoreList = JSON.parse(highScoreList);
+        highScoreList = JSON.parse(highScoreList);
+        highScoreList.forEach(data => {
+            html += '<li>'+data.name + '-'+data.score+'</li>';
+          });
       }
 
-    //  var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-      
-    //  var highScoresRank = document.getElementById('high-scores-rank');
-    //   highScoresList.innerHTML = '';
-      
-      highScoreList.forEach(data => {
-        html += '<li>'+data.name + '-'+data.score+'</li>';
-      });
       if (html !=""){
-        document.getElementById('show-highscores').innerHTML = '<ul>'+html+'</ul>';
+        html = '<ul>'+html+'</ul>';
+        
+      }
+    else {
+      html = 'No high scores';
     }
-  //STILL MISSING FROM THE ACCEPTANCE CRITERIA
-  //VIEW HIGH SCORES IN FRONT PAGE
-  //CLEAR HIGH SCORES
-  //SHOW HIGH SCORES
-  //CAN Click HIGH SCORES FROM THE MAIN PAGE
-  
+    document.getElementById('show-highscores').innerHTML = html;
   };
+
+  var backButtonEl = document.getElementById("back-button");
+  backButtonEl.addEventListener("click", function(event){
+    window.location.reload();
+  });
+
+  function showPage(pageID) {
+    document.querySelectorAll('section').forEach((page) => {
+      if (page.id == pageID) {
+      page.style.display = 'block';
+    }
+    else {
+    page.style.display = 'none';
+    }
+    });
+    };
+  

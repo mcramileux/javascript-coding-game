@@ -13,7 +13,7 @@
   <!--TITLE, HIGH SCORES AND TIMER INFO /// TO EDIT: NEED TO BE ON THE TOP CORNER-->
         <div class="show-timer">
           <div id="timer">Time Left: <span id="timer-score">60 seconds</span></div>
-            <button class="score-button">View High Scores</button>
+            <button class="score-button" id="view-highscore" data-goto="high-score-page">View High Scores</button>
         </div>
       </header>
 
@@ -24,7 +24,7 @@
               <p>Test your coding skills by answering the following questions within the time limit.</p>
               <p>Keep in mind that incorrect answers will penalise your score time by 10 seconds!</p>
               <br>
-              <button class="start-button" id="start-quiz-button">
+              <button class="start-button" id="start-quiz-button" data-goto="question-page">
               Start Quiz</button>
     </section>
   <!--END OF INSTRUCTIONS INTRODUCTION-->
@@ -48,7 +48,7 @@
             <form id="initials-form">
               <label for="enter-initials">Enter your initials:</label>
                 <input type="text" id="enter-initials" name="initials" placeholder="initials"/>
-                  <button type ="submit" id="main-button" class="submit-initials">Submit</button>
+                  <button type ="submit" id="main-button" data-goto="high-score-page" class="submit-initials">Submit</button>
             </form>
           </section>     
     <!--HIGH SCORE PAGE-->
