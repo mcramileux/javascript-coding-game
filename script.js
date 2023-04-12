@@ -60,15 +60,22 @@ var _questions = [
   var showTimer = document.querySelector("show-timer");
   var timer = document.getElementById("timer");
   var timeEl = document.getElementById("timer-score");
+  var timerInterval;
+  //put a global variable for timer to stop and put alert "time's up!"
 
   function setTime() {
-    var timerInterval = setInterval (function() {
+    timerInterval = setInterval (function() {
       _secondsLeft--;
       timeEl.textContent = _secondsLeft;
 
-      if (_secondsLeft === 0) {
+      if (_secondsLeft <= 0) {
         clearInterval(timerInterval);
         sendMessage();
+
+
+    document.getElementById("final-score-page").style.display = "block";
+    document.getElementById("question-page").style.display = "none";
+    endQuiz();
       }
     },  1000);
   
@@ -125,18 +132,18 @@ var _questions = [
       setQuizQuestions();
     }
     else {
-      document.getElementById("final-score-page").style.display = "block";
+    document.getElementById("final-score-page").style.display = "block";
     document.getElementById("question-page").style.display = "none";
+    endQuiz();
     }
   }
 
   //SHOW HIGH SCORES---ADD MORE
   function endQuiz() {
-    clearInterval(timer);
+    clearInterval(timerInterval);
     showHighScores();
     document.getElementById("question").style.display = "none";
     document.getElementById("my-score").textContent
-
   }
 
 
