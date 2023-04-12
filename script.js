@@ -2,6 +2,7 @@
 var _questionID = 0;
 var _correctCount = 0;
 var _secondsLeft = 60; //changing to 10seconds for debugging
+var _qWait = 0;
 
 //QUESTIONS AND ANSWERS
 var _questions = [
@@ -78,11 +79,11 @@ var _questions = [
       }
     },  1000);
   
-    //var timerInterval = setInterval(updateShowTimer, 1000);
+  //var timerInterval = setInterval(updateShowTimer, 1000);
   }
 
   function sendMessage(){
-    //alert the user that the time is up
+  //alert the user that the time is up
  }
   
   //START EVENT LISTENER
@@ -92,7 +93,7 @@ var _questions = [
     document.getElementById("instructions-page").style.display = "none";
     document.getElementById("question-page").style.display = "block";
       setTime(); 
-});
+  });
 
     document.getElementById("answer-buttons").addEventListener("click", function(ev) {
       if(ev.target.tagName == "DIV"){
@@ -109,12 +110,12 @@ var _questions = [
     var html = "";
     var answers = _questions[_questionID].answers;
     document.getElementById("question").innerHTML = _questions[_questionID].question;
-    //document.getElementById("quiz-feedback").innerHTML = "";
+    document.getElementById("quiz-feedback").innerHTML = "";
     for (var answer in answers) {     
       html += '<button data-answer="'+answer +'" class="button">'+answer + ": "+ answers[answer]+'</button>';
       }
       document.getElementById("answer-buttons").innerHTML = html;
-};
+  };
 
   function checkAnswers(aID){ 
     
@@ -129,75 +130,78 @@ var _questions = [
     }
     document.getElementById("my-score").innerHTML = _correctCount;
 
-     
-    if (_questionID < _questions.length - 1){
-      _questionID = _questionID + 1;
-      setQuizQuestions();
+    
+    _qWait = setTimeout(function() {
+        if (_questionID < _questions.length - 1){
+        _questionID = _questionID + 1;
+        setQuizQuestions();
     }
-    else {
-    document.getElementById("final-score-page").style.display = "block";
-    document.getElementById("question-page").style.display = "none";
-    endQuiz();
+       else {
+        document.getElementById("final-score-page").style.display = "block";
+        document.getElementById("question-page").style.display = "none";
+        endQuiz();
     }
-  }
+      }, 4000);
+      
+  };
 
   //SHOW HIGH SCORES---ADD MORE
-  // function endQuiz() {
-  //   clearInterval(timerInterval);
-  //   showHighScores();
-  //   document.getElementById("question").style.display = "none";
-  //   document.getElementById("my-score").textContent
-  // }
+  function endQuiz() {
+    timeEl.textContent = "0";
+    clearInterval(timerInterval);
+    showHighScores();
+  }
 
   //ENTER INITIALS---ADD MORE
-    var enterInitials = document.getElementById("main-button");
-    var initials = document.getElementById("enter-initials");
-    enterInitials.addEventListener("click", (e) => {
+    document.getElementById("main-button").addEventListener("click", (e) => {
       e.preventDefault();
-      console.log(initials.value);
+      console.log(document.getElementById("enter-initials").value);
+      document.getElementById("final-score-page").style.display = "none";
+      saveHighScore();
+      showHighScores();
     });
-    saveHighScore = ev => {
-      console.log("clicked the submit button");
-      ev.preventDefault();
+
+    //SAVING THE SCORE 
+    function saveHighScore() {
+    var highScoreList = localStorage.getItem("highScoreList");
+    var initials = document.getElementById("enter-initials").value;
+    var data = { name: initials, score: _correctCount };
+        if (highScoreList == null) {
+          highScoreList = [];  
+    } 
+    else {
+      highScoreList = JSON.parse(highScoreList); 
+    }
+
+    highScoreList.push(data);
+    localStorage.setItem("highScoreList", JSON.stringify(highScoreList));
+    _correctCount = 0;
     };
 
-  //SAVING THE SCORE 
-  saveSubmitButton.addEventListener('click', function () {
-    var users = JSON.parse(localStorage.getItem("enterInitials")) || [];
-    var nameUser = document.getElementById('enterInitials').value;
-    var data = { name: enterInitials, score: saveScores };
+    // Retrieve the high scores from local storage
+    function showHighScores() {
+      var highScoreList = localStorage.getItem("highScoreList");
+      var html = "";
+      document.getElementById("high-score-page").style.display = "block";
+      if (highScoreList != null) {
+           highScoreList = JSON.parse(highScoreList);
+      }
 
-    enterInitials.push(data);
-    localStorage.setItem('enterInitials', JSON.stringify(users));
-    confirm ("Your score has been saved");
-    document.getElementById("confirmButton").addEventListener("click", function() {
-        document.getElementById("enterInitials").value = "";
+    //  var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+      
+    //  var highScoresRank = document.getElementById('high-scores-rank');
+    //   highScoresList.innerHTML = '';
+      
+      highScoreList.forEach(data => {
+        html += '<li>'+data.name + '-'+data.score+'</li>';
       });
-
-  });
-
-  // // Retrieve the high scores from local storage
-  //   function showHighScores() {
-  //    var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-      
-  //    var highScoresRank = document.getElementById('high-scores-rank');
-  //     highScoresList.innerHTML = '';
-      
-  //     highScores.forEach(score => {
-  //       var li = document.createElement('li');
-  //       li.innerText = `${initials} - ${score}`;
-  //       highScoresRank.appendChild(li);
-  //     });
-  //   }
-    // clearInterval(timerInterval);
-    // showHighScores();
-    // document.getElementById("question").style.display = "none";
-    // document.getElementById("my-score").textContent
-//STILL MISSING FROM THE ACCEPTANCE CRITERIA
-  //NEED LOCAL STORAGE
+      if (html !=""){
+        document.getElementById('show-highscores').innerHTML = '<ul>'+html+'</ul>';
+    }
+  //STILL MISSING FROM THE ACCEPTANCE CRITERIA
   //VIEW HIGH SCORES IN FRONT PAGE
   //CLEAR HIGH SCORES
   //SHOW HIGH SCORES
   //CAN Click HIGH SCORES FROM THE MAIN PAGE
   
-
+  };
