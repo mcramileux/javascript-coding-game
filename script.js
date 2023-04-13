@@ -65,8 +65,8 @@ var _questions = [
 
   function setTime() {
     _timerInterval = setInterval (function() {
-      _secondsLeft--;
-      timeEl.textContent = _secondsLeft;
+    _secondsLeft--;
+    timeEl.textContent = _secondsLeft;
 
       if (_secondsLeft <= 0) {
         clearInterval(_timerInterval);

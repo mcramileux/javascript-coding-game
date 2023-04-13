@@ -10,59 +10,61 @@
   <body>
     <main class="container">
       <header>
-  <!--TITLE, HIGH SCORES AND TIMER INFO /// TO EDIT: NEED TO BE ON THE TOP CORNER-->
-        <div class="show-timer">
-          <div id="timer">Time Left: <span id="timer-score">60 seconds</span></div>
-            <button class="score-button" id="view-highscore" data-goto="high-score-page">View High Scores</button>
-        </div>
+        <!--TITLE, HIGH SCORES AND TIMER INFO /// TO EDIT: NEED TO BE ON THE TOP CORNER-->
+          <div class="show-timer">
+            <div id="timer">Time Left: <span id="timer-score">60 seconds</span></div>
+              <button class="score-button" id="view-highscore" data-goto="high-score-page">View High Scores</button>
+            </div>
       </header>
 
-  <!--INSTRUCTIONS INTRODUCTION /// FIRST PAGE-->
-    <section id="instructions-page">            
-        <h1>JavaScript Quiz Game</h1>
-            <div id="instruction"><strong>Instructions</strong></div>
-              <p>Test your coding skills by answering the following questions within the time limit.</p>
-              <p>Keep in mind that incorrect answers will penalise your score time by 10 seconds!</p>
-              <br>
-              <button class="start-button" id="start-quiz-button" data-goto="question-page">
-              Start Quiz</button>
-    </section>
-  <!--END OF INSTRUCTIONS INTRODUCTION-->
+        <!--INSTRUCTIONS INTRODUCTION /// FIRST PAGE-->
+          <section id="instructions-page">            
+            <h1>JavaScript Quiz Game</h1>
+              <div id="instruction"><strong>Instructions</strong></div>
+                <p>Test your coding skills by answering the following questions within the time limit.</p>
+                  <p>Keep in mind that incorrect answers will penalise your score time by 10 seconds!</p>
+                    <br>
+                      <button class="start-button" id="start-quiz-button" data-goto="question-page">
+                        Start Quiz</button>
+          </section>
+        <!--END OF INSTRUCTIONS INTRODUCTION-->
 
-  <!--QUESTION AND ANSWER PORTION STARTS HERE /// MAIN PAGE-->
-        <section id="question-page">
+        <!--QUESTION AND ANSWER PORTION STARTS HERE /// MAIN PAGE-->
+          <section id="question-page">
             <h2>Question</h2>
-            <div id="question"></div>
-              <div id="answer-buttons" class="button-box">
-            </div>
-          <!--SHOWS IF THE ANSWER IS CORRECT OR WRONG BELOW THE CHOICES-->
-          <div id="quiz-feedback"></div>
-        </section>
-  <!--END OF QUESTION AND ANSWER-->
+              <div id="question"></div>
+                <div id="answer-buttons" class="button-box">
+              </div>
+        <!--SHOWS IF THE ANSWER IS CORRECT OR WRONG BELOW THE CHOICES-->
+                <div id="quiz-feedback"></div>
+          </section>
+         <!--END OF QUESTION AND ANSWER-->
 
-  <!--ENTER INITIALS AND SEE HIGH SCORES-->
-    <section id="final-score-page">
-          <h2>All done!</h2>
-            <p>Your final score is: <span id="my-score">0</span> out of <span class="total-score">5</span></p>
-  <!--SUBMITTING INITIALS-->
-            <form id="initials-form">
-              <label for="enter-initials">Enter your initials:</label>
-                <input type="text" id="enter-initials" name="initials" placeholder="initials"/>
-                  <button type ="submit" id="main-button" data-goto="high-score-page" class="submit-initials">Submit</button>
-            </form>
-          </section>     
-    <!--HIGH SCORE PAGE-->
-    <section id="high-score-page">      
-                  <h2>High Scores</h2>
-      <!--DISPLAY OF 5 TOP SCORES THROUGH JAVASCRIPT CODE -->
-                  <div id="show-highscores"></div>   
-        <button id="back-button" class="go-back-button">Go Back</button>
-      <button id="scores-button" class="clear-scores-button">Clear High Scores</button>
-    </section>
+        <!--ENTER INITIALS AND SEE HIGH SCORES-->
+          <section id="final-score-page">
+            <h2>All done!</h2>
+              <p>Your final score is: <span id="my-score">0</span> out of <span class="total-score">5</span></p>
+        <!--SUBMITTING INITIALS-->
+                <form id="initials-form">
+                  <label for="enter-initials">Enter your initials:</label>
+                    <input type="text" id="enter-initials" name="initials" placeholder="initials"/>
+                      <button type ="submit" id="main-button" data-goto="high-score-page" class="submit-initials">Submit</button>
+                </form>
+          </section> 
+
+        <!--HIGH SCORE PAGE-->
+          <section id="high-score-page">      
+            <h2>High Scores</h2>
+        <!--DISPLAY OF 5 TOP SCORES THROUGH JAVASCRIPT CODE -->
+              <div id="show-highscores"></div>   
+                <button id="back-button" class="go-back-button">Go Back</button>
+                  <button id="scores-button" class="clear-scores-button">Clear High Scores</button>
+          </section>
     </main>
-    <!--JAVASCRIPT PLACEMENT-->
-    <!--defer attribute is added to specifies that the script is downloaded in parallel 
-    to parsing the page, and executed after the page has finished parsing.-->
-    <script defer src="script.js"></script>   
+        <!--JAVASCRIPT PLACEMENT-->
+
+        <!--defer attribute is added to specifies that the script is downloaded in parallel 
+        to parsing the page, and executed after the page has finished parsing.-->
+          <script defer src="script.js"></script>   
   </body>
 </html>
