@@ -1,5 +1,5 @@
 # JavaScript Coding Game
-Fourth Challenge (JavaScript and Web APIs)
+Fourth Challenge (JavaScript and Web APIs: Code Quiz)
 
 ## Description
 This application was created to apply what has been taught on JavaScript and Web APIs by building a javascript coding quiz. The coding quiz has five questions and must be answered on alloted time. If the answer is incorrect, the time will decrease by ten seconds.
